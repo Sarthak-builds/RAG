@@ -39,6 +39,11 @@ Thumbs.db
 # Logs
 *.log
 
+# Frontend / Node
+node_modules/
+.next/
+out/
+
 # Build/vector index artifacts (uncomment when generated)
 # vectorstore/
 # vector_store/
