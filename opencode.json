@@ -1,0 +1,26 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "*": "ask",
+    "read": "allow",
+    "edit": "ask",
+    "question": "allow",
+    "webfetch": "ask",
+    "external_directory": "ask",
+    "doom_loop": "ask",
+    "bash": {
+      "*": "ask",
+      "uv *": "allow",
+      "npm *": "allow",
+      "just *": "allow",
+      "docker *": "allow",
+      "uvx *": "allow",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git add *": "ask",
+      "git commit *": "ask",
+      "git push*": "deny"
+    }
+  }
+}

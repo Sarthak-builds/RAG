@@ -1,0 +1,21 @@
+repos:
+  - repo: local
+    hooks:
+      - id: rag-format
+        name: ruff format (backend)
+        entry: uv run --project backend ruff format backend
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+      - id: rag-lint
+        name: just lint (everywhere the gate lints)
+        entry: just lint
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+      - id: rag-secret-scan
+        name: detect-secrets (baseline diff)
+        entry: uvx detect-secrets scan --baseline .secrets.baseline
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
