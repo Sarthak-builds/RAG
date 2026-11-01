@@ -1,0 +1,21 @@
+[importlinter]
+root_package = app
+
+[importlinter:contract:domain]
+name = Domain stays independent (no application/adapters/interfaces imports)
+type = forbidden
+source_modules =
+    app.domain
+forbidden_modules =
+    app.application
+    app.adapters
+    app.interfaces
+
+[importlinter:contract:layers]
+name = Dependencies point inward only (interfaces -> adapters -> application -> domain)
+type = layers
+layers =
+    app.interfaces
+    app.adapters
+    app.application
+    app.domain
