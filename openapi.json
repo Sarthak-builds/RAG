@@ -1,0 +1,165 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "RAG",
+    "version": "0.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StatusEvent": {
+        "description": "Pipeline phase progress (e.g. rewritten the question, routed, executed).",
+        "properties": {
+          "kind": {
+            "const": "status",
+            "default": "status",
+            "title": "Kind",
+            "type": "string"
+          },
+          "question_id": {
+            "title": "Question Id",
+            "type": "string"
+          },
+          "phase": {
+            "title": "Phase",
+            "type": "string"
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Detail"
+          }
+        },
+        "required": [
+          "question_id",
+          "phase"
+        ],
+        "title": "StatusEvent",
+        "type": "object"
+      },
+      "TokenEvent": {
+        "description": "One streamed answer token.",
+        "properties": {
+          "kind": {
+            "const": "token",
+            "default": "token",
+            "title": "Kind",
+            "type": "string"
+          },
+          "question_id": {
+            "title": "Question Id",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question_id",
+          "text"
+        ],
+        "title": "TokenEvent",
+        "type": "object"
+      },
+      "ResultEvent": {
+        "description": "Final answer snapshot: text, evidence and the abstain flag (ADR-0008).",
+        "properties": {
+          "kind": {
+            "const": "result",
+            "default": "result",
+            "title": "Kind",
+            "type": "string"
+          },
+          "question_id": {
+            "title": "Question Id",
+            "type": "string"
+          },
+          "answer": {
+            "title": "Answer",
+            "type": "string"
+          },
+          "evidence_refs": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Refs",
+            "type": "array"
+          },
+          "abstained": {
+            "default": false,
+            "title": "Abstained",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "question_id",
+          "answer"
+        ],
+        "title": "ResultEvent",
+        "type": "object"
+      },
+      "ErrorEvent": {
+        "description": "Typed failure carrying the question id it belongs to.",
+        "properties": {
+          "kind": {
+            "const": "error",
+            "default": "error",
+            "title": "Kind",
+            "type": "string"
+          },
+          "question_id": {
+            "title": "Question Id",
+            "type": "string"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question_id",
+          "code",
+          "message"
+        ],
+        "title": "ErrorEvent",
+        "type": "object"
+      }
+    }
+  }
+}

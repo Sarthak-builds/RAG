@@ -1,0 +1,30 @@
+{
+  "name": "rag-frontend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "types": "npm run types:check && tsc --noEmit",
+    "types:generate": "openapi-typescript ../openapi.json --output src/api/generated.ts",
+    "types:check": "node scripts/check-generated.mjs"
+  },
+  "dependencies": {
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "eslint": "^9.20.0",
+    "globals": "^16.0.0",
+    "openapi-typescript": "^7.6.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0"
+  }
+}
